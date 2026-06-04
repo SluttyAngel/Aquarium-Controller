@@ -1,0 +1,339 @@
+(kicad_sch (version 20230121)
+
+  (uuid "12345678-1234-1234-1234-123456789012")
+
+  (paper "A4")
+
+  (title_block
+    (title "Aquarium ATO Controller")
+    (date "2026-06-04")
+    (rev "V1.1")
+    (company "DIY Project")
+    (comment 1 "Wireless Auto Top-Off Controller")
+    (comment 2 "ESP32-S3 XIAO based PCBA")
+  )
+
+  (layers
+    (0 "F.Cu" signal)
+    (31 "B.Cu" signal)
+    (32 "B.Adhes" user)
+    (33 "F.Adhes" user)
+    (34 "B.Paste" user)
+    (35 "F.Paste" user)
+    (36 "B.SilkS" user)
+    (37 "F.SilkS" user)
+    (38 "B.Mask" user)
+    (39 "F.Mask" user)
+    (40 "Dwgs.User" user)
+    (41 "Cmts.User" user)
+    (42 "Eco1.User" user)
+    (43 "Eco2.User" user)
+    (44 "Edge.Cuts" user)
+    (45 "Margin" user)
+    (46 "B.CrtYd" user)
+    (47 "F.CrtYd" user)
+    (48 "B.Fab" user)
+    (49 "F.Fab" user)
+  )
+
+  (setup
+    (pad_to_mask_clearance 0)
+    (pcbplotparams
+      (layerselection 0x00010fc_ffffffff)
+      (usegerberextensions false)
+      (usegerberattributes false)
+      (usegerberadvancedattributes false)
+      (creategerberjobfile false)
+      (svguseinch false)
+      (svgprecision 6)
+      (excludeedgelayer true)
+      (linewidth 0.100000)
+      (plotframeref false)
+      (viasonmask false)
+      (mode 1)
+      (useauxorigin false)
+      (hpglpennumber 1)
+      (hpglpenspeed 20)
+      (hpglpendiameter 15.000000)
+      (psnegative false)
+      (psacolor false)
+      (pseacolor false)
+      (plottype 0)
+      (psfile false)
+      (plotonallflayers false)
+      (plotonlysoldersmask false)
+      (lpadtype 0)
+      (colormode 0)
+      (mirror false)
+      (sketchpadsonfab false)
+      (subtractmaskfromsilk false)
+      (outputformat 1)
+      (penthickness 0.120000)
+      (plotcentering false)
+      (maxaperturesize 0.000000)
+      (gbr4mode false)
+      (dxfpolygonmode true)
+      (dxfimperialunits true)
+      (gerblimits false)
+      (flattenoutput false)
+      (mergepolygons false)
+      (maxchordradius 0.000000)
+      (arcapproxmethod 0)
+      (gerbinvertswapin false)
+    )
+  )
+
+  (net 0 "GND")
+  (net 1 "+5V")
+  (net 2 "GPIO1_LOW_SENSOR")
+  (net 3 "GPIO2_HIGH_SENSOR")
+  (net 4 "GPIO3_RESERVOIR")
+  (net 5 "GPIO4_RELAY_CTRL")
+  (net 6 "GPIO5_PUMP_LED")
+  (net 7 "GPIO6_ERR_LED")
+  (net 8 "PUMP_OUT")
+  (net 9 "RELAY_COIL")
+
+  (wire (pts (xy 50 50) (xy 250 50)) (stroke (width 0) (type solid)) (uuid ""))
+
+  ; ===== SECTION 1: POWER INPUT =====
+  (symbol (lib_id "Connector:USB_C_Receptacle_24pin")
+    (at 20 100 0) (uuid "pwr-001")
+    (property "Reference" "J1" (id 0) (at 20 85 0))
+    (property "Value" "USB_C_24pin" (id 1) (at 20 115 0))
+    (pin "A1" (uuid ""))
+    (pin "A12" (uuid ""))
+    (pin "B12" (uuid ""))
+  )
+
+  (symbol (lib_id "Device:Polyfuse")
+    (at 60 100 0) (uuid "pwr-002")
+    (property "Reference" "F1" (id 0) (at 60 85 0))
+    (property "Value" "MF-R150" (id 1) (at 60 115 0))
+  )
+
+  (symbol (lib_id "Device:D_Zener")
+    (at 100 100 0) (uuid "pwr-003")
+    (property "Reference" "D1" (id 0) (at 100 85 0))
+    (property "Value" "SMBJ5.0A" (id 1) (at 100 115 0))
+  )
+
+  (symbol (lib_id "Device:C")
+    (at 140 120 0) (uuid "pwr-004")
+    (property "Reference" "C1" (id 0) (at 145 120 0))
+    (property "Value" "470µF/10V" (id 1) (at 145 110 0))
+  )
+
+  (symbol (lib_id "Device:C")
+    (at 180 120 0) (uuid "pwr-005")
+    (property "Reference" "C2" (id 0) (at 185 120 0))
+    (property "Value" "100nF" (id 1) (at 185 110 0))
+  )
+
+  (symbol (lib_id "Switch:SW_SPST")
+    (at 220 100 0) (uuid "pwr-006")
+    (property "Reference" "SW1" (id 0) (at 220 85 0))
+    (property "Value" "SPST_5A" (id 1) (at 220 115 0))
+  )
+
+  ; ===== SECTION 2: MCU SECTION =====
+  (symbol (lib_id "Connector:Conn_01x20_Female")
+    (at 50 250 0) (uuid "mcu-001")
+    (property "Reference" "U1_SOCKET" (id 0) (at 50 235 0))
+    (property "Value" "XIAO_ESP32S3_SOCKET" (id 1) (at 50 265 0))
+  )
+
+  (symbol (lib_id "Device:C")
+    (at 120 250 0) (uuid "mcu-002")
+    (property "Reference" "C2" (id 0) (at 125 250 0))
+    (property "Value" "100nF" (id 1) (at 125 240 0))
+  )
+
+  ; ===== SECTION 3: RELAY CONTROL =====
+  (symbol (lib_id "Relay:SRD_06VDC_SL_C")
+    (at 50 380 0) (uuid "relay-001")
+    (property "Reference" "RLY1" (id 0) (at 50 365 0))
+    (property "Value" "HF32F-G_005-HS" (id 1) (at 50 395 0))
+  )
+
+  (symbol (lib_id "Transistor_BJT:2N2222")
+    (at 120 380 0) (uuid "relay-002")
+    (property "Reference" "Q1" (id 0) (at 125 380 0))
+    (property "Value" "2N2222" (id 1) (at 125 370 0))
+  )
+
+  (symbol (lib_id "Device:D")
+    (at 160 380 0) (uuid "relay-003")
+    (property "Reference" "D2" (id 0) (at 165 380 0))
+    (property "Value" "1N4148" (id 1) (at 165 370 0))
+  )
+
+  (symbol (lib_id "Device:R")
+    (at 200 380 0) (uuid "relay-004")
+    (property "Reference" "R1" (id 0) (at 205 380 0))
+    (property "Value" "10kΩ" (id 1) (at 205 370 0))
+  )
+
+  (symbol (lib_id "Device:D")
+    (at 240 380 0) (uuid "relay-005")
+    (property "Reference" "D3" (id 0) (at 245 380 0))
+    (property "Value" "SS14" (id 1) (at 245 370 0))
+  )
+
+  ; ===== SECTION 4: PUMP OUTPUT =====
+  (symbol (lib_id "Connector:USB_A")
+    (at 50 480 0) (uuid "pump-001")
+    (property "Reference" "J2" (id 0) (at 50 465 0))
+    (property "Value" "USB_A_Pump_Output" (id 1) (at 50 495 0))
+  )
+
+  ; ===== SECTION 5: SENSOR CONNECTORS =====
+  (symbol (lib_id "Connector:Conn_01x04_Female")
+    (at 50 580 0) (uuid "sens-001")
+    (property "Reference" "J3" (id 0) (at 50 565 0))
+    (property "Value" "LOW_SENSOR_JST-XH" (id 1) (at 50 595 0))
+  )
+
+  (symbol (lib_id "Connector:Conn_01x04_Female")
+    (at 120 580 0) (uuid "sens-002")
+    (property "Reference" "J4" (id 0) (at 120 565 0))
+    (property "Value" "HIGH_SENSOR_JST-XH" (id 1) (at 120 595 0))
+  )
+
+  (symbol (lib_id "Connector:Conn_01x04_Female")
+    (at 190 580 0) (uuid "sens-003")
+    (property "Reference" "J5" (id 0) (at 190 565 0))
+    (property "Value" "EXPANSION_JST-XH" (id 1) (at 190 595 0))
+  )
+
+  (symbol (lib_id "Connector:Conn_01x04_Female")
+    (at 260 580 0) (uuid "sens-004")
+    (property "Reference" "J6" (id 0) (at 260 565 0))
+    (property "Value" "RESERVOIR_JST-XH" (id 1) (at 260 595 0))
+  )
+
+  ; ===== SECTION 6: STATUS LEDS =====
+  (symbol (lib_id "Device:LED")
+    (at 50 680 0) (uuid "led-001")
+    (property "Reference" "LED1" (id 0) (at 50 665 0))
+    (property "Value" "LED_GREEN_PWR" (id 1) (at 50 695 0))
+  )
+
+  (symbol (lib_id "Device:LED")
+    (at 110 680 0) (uuid "led-002")
+    (property "Reference" "LED2" (id 0) (at 110 665 0))
+    (property "Value" "LED_BLUE_PUMP" (id 1) (at 110 695 0))
+  )
+
+  (symbol (lib_id "Device:LED")
+    (at 170 680 0) (uuid "led-003")
+    (property "Reference" "LED3" (id 0) (at 170 665 0))
+    (property "Value" "LED_RED_ERR" (id 1) (at 170 695 0))
+  )
+
+  (symbol (lib_id "Device:LED")
+    (at 230 680 0) (uuid "led-004")
+    (property "Reference" "LED4" (id 0) (at 230 665 0))
+    (property "Value" "LED_AMBER_RELAY" (id 1) (at 230 695 0))
+  )
+
+  (symbol (lib_id "Device:R")
+    (at 50 720 0) (uuid "led-005")
+    (property "Reference" "R2" (id 0) (at 55 720 0))
+    (property "Value" "330Ω" (id 1) (at 55 710 0))
+  )
+
+  (symbol (lib_id "Device:R")
+    (at 110 720 0) (uuid "led-006")
+    (property "Reference" "R3" (id 0) (at 115 720 0))
+    (property "Value" "330Ω" (id 1) (at 115 710 0))
+  )
+
+  (symbol (lib_id "Device:R")
+    (at 170 720 0) (uuid "led-007")
+    (property "Reference" "R4" (id 0) (at 175 720 0))
+    (property "Value" "330Ω" (id 1) (at 175 710 0))
+  )
+
+  (symbol (lib_id "Device:R")
+    (at 230 720 0) (uuid "led-008")
+    (property "Reference" "R5" (id 0) (at 235 720 0))
+    (property "Value" "330Ω" (id 1) (at 235 710 0))
+  )
+
+  ; ===== NET CONNECTIONS =====
+  
+  ; Power Rail Connections
+  (wire (pts (xy 40 100) (xy 60 100)) (stroke (width 0.254) (type solid)) (uuid "pwr-net-001"))
+  (wire (pts (xy 60 100) (xy 100 100)) (stroke (width 0.254) (type solid)) (uuid "pwr-net-002"))
+  (wire (pts (xy 100 100) (xy 140 100)) (stroke (width 0.254) (type solid)) (uuid "pwr-net-003"))
+  (wire (pts (xy 140 100) (xy 220 100)) (stroke (width 0.254) (type solid)) (uuid "pwr-net-004"))
+  (label "+5V" (at 150 80 0) (fields_autoplaced) (effects (font (size 1.27 1.27) (thickness 0.15))))
+  
+  ; Ground Connections
+  (wire (pts (xy 40 110) (xy 30 110)) (stroke (width 0.254) (type solid)) (uuid "gnd-net-001"))
+  (wire (pts (xy 30 110) (xy 30 150)) (stroke (width 0.254) (type solid)) (uuid "gnd-net-002"))
+  (wire (pts (xy 100 110) (xy 100 150)) (stroke (width 0.254) (type solid)) (uuid "gnd-net-003"))
+  (wire (pts (xy 140 130) (xy 140 150)) (stroke (width 0.254) (type solid)) (uuid "gnd-net-004"))
+  (wire (pts (xy 180 130) (xy 180 150)) (stroke (width 0.254) (type solid)) (uuid "gnd-net-005"))
+  (label "GND" (at 80 150 0) (fields_autoplaced) (effects (font (size 1.27 1.27) (thickness 0.15))))
+  
+  ; Sensor Connections
+  (wire (pts (xy 70 250) (xy 90 250)) (stroke (width 0.254) (type solid)) (uuid "sens-gpio-001"))
+  (label "GPIO1_LOW_SENSOR" (at 95 250 0) (effects (font (size 1.27 1.27) (thickness 0.15))))
+  
+  (wire (pts (xy 70 270) (xy 90 270)) (stroke (width 0.254) (type solid)) (uuid "sens-gpio-002"))
+  (label "GPIO2_HIGH_SENSOR" (at 95 270 0) (effects (font (size 1.27 1.27) (thickness 0.15))))
+  
+  (wire (pts (xy 70 290) (xy 90 290)) (stroke (width 0.254) (type solid)) (uuid "sens-gpio-003"))
+  (label "GPIO3_RESERVOIR" (at 95 290 0) (effects (font (size 1.27 1.27) (thickness 0.15))))
+  
+  ; Relay Control
+  (wire (pts (xy 70 310) (xy 90 310)) (stroke (width 0.254) (type solid)) (uuid "relay-gpio-001"))
+  (label "GPIO4_RELAY_CTRL" (at 95 310 0) (effects (font (size 1.27 1.27) (thickness 0.15))))
+  
+  ; LED Controls
+  (wire (pts (xy 70 330) (xy 90 330)) (stroke (width 0.254) (type solid)) (uuid "led-gpio-001"))
+  (label "GPIO5_PUMP_LED" (at 95 330 0) (effects (font (size 1.27 1.27) (thickness 0.15))))
+  
+  (wire (pts (xy 70 350) (xy 90 350)) (stroke (width 0.254) (type solid)) (uuid "led-gpio-002"))
+  (label "GPIO6_ERR_LED" (at 95 350 0) (effects (font (size 1.27 1.27) (thickness 0.15))))
+  
+  ; Relay Coil Connection
+  (wire (pts (xy 90 380) (xy 120 380)) (stroke (width 0.254) (type solid)) (uuid "relay-coil-001"))
+  (label "RELAY_COIL" (at 100 370 0) (effects (font (size 1.27 1.27) (thickness 0.15))))
+  
+  ; Pump Output Connection
+  (wire (pts (xy 90 480) (xy 70 480)) (stroke (width 0.254) (type solid)) (uuid "pump-out-001"))
+  (label "PUMP_OUT" (at 75 480 0) (effects (font (size 1.27 1.27) (thickness 0.15))))
+  
+  ; Sensor Connector Power & Ground
+  (wire (pts (xy 55 580) (xy 55 560)) (stroke (width 0.254) (type solid)) (uuid "sens-pwr-001"))
+  (label "+5V" (at 55 555 0) (effects (font (size 1.27 1.27) (thickness 0.15))))
+  
+  (wire (pts (xy 60 580) (xy 60 560)) (stroke (width 0.254) (type solid)) (uuid "sens-gnd-001"))
+  (label "GND" (at 60 555 0) (effects (font (size 1.27 1.27) (thickness 0.15))))
+  
+  ; LED Connections
+  (wire (pts (xy 50 690) (xy 50 720)) (stroke (width 0.254) (type solid)) (uuid "led-conn-001"))
+  (wire (pts (xy 50 730) (xy 50 750)) (stroke (width 0.254) (type solid)) (uuid "led-gnd-001"))
+  (label "GND" (at 50 750 0) (effects (font (size 1.27 1.27) (thickness 0.15))))
+  
+  (wire (pts (xy 110 690) (xy 110 720)) (stroke (width 0.254) (type solid)) (uuid "led-conn-002"))
+  (wire (pts (xy 110 730) (xy 110 750)) (stroke (width 0.254) (type solid)) (uuid "led-gnd-002"))
+  
+  (wire (pts (xy 170 690) (xy 170 720)) (stroke (width 0.254) (type solid)) (uuid "led-conn-003"))
+  (wire (pts (xy 170 730) (xy 170 750)) (stroke (width 0.254) (type solid)) (uuid "led-gnd-003"))
+  
+  (wire (pts (xy 230 690) (xy 230 720)) (stroke (width 0.254) (type solid)) (uuid "led-conn-004"))
+  (wire (pts (xy 230 730) (xy 230 750)) (stroke (width 0.254) (type solid)) (uuid "led-gnd-004"))
+
+  ; Text annotations
+  (text "POWER INPUT SECTION" (at 130 70 0) (effects (font (size 2 2) (thickness 0.3))))
+  (text "MCU SECTION" (at 130 220 0) (effects (font (size 2 2) (thickness 0.3))))
+  (text "RELAY CONTROL SECTION" (at 140 350 0) (effects (font (size 2 2) (thickness 0.3))))
+  (text "PUMP OUTPUT SECTION" (at 140 450 0) (effects (font (size 2 2) (thickness 0.3))))
+  (text "SENSOR CONNECTORS" (at 140 550 0) (effects (font (size 2 2) (thickness 0.3))))
+  (text "STATUS LEDS" (at 130 650 0) (effects (font (size 2 2) (thickness 0.3))))
+
+)
